@@ -1,0 +1,67 @@
+/* Reset dan dasar */
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+    color: #333;
+    background-image: url('../imgs/headers.jpg');
+    background-size: cover;
+}
+
+h1 {
+    text-align: center;
+    font-size: 2.5em;
+    color: #2e7d32; /* Hijau agrikultur */
+    margin-bottom: 20px;
+}
+
+/* Container */
+.form-container {
+    max-width: 800px;
+    margin: 50px auto;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Form Group */
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.form-group input, 
+.form-group textarea, 
+.form-group select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.form-group textarea {
+    resize: vertical;
+}
+
+/* Tombol Submit */
+.form-group button {
+    background: #2e7d32;
+    color: #fff;
+    border: none;
+    padding: 15px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.form-group button:hover {
+    background: #1b5e20;
+}
