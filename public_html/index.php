@@ -20,7 +20,7 @@ include "header.php";  // Bagian head.php menggantikan seluruh tag <head> di sin
                 <button class="btn btn-primary btn-rounded"></i>Discover More</button>
             </div>
         </div>
-    </header>
+    </header> 
     <nav class="navbar sticky-top navbar-expand-lg navbar-light bg-white" data-spy="affix" data-offset-top="510">
         <div class="container">
             <button class="navbar-toggler ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -433,7 +433,7 @@ include "header.php";  // Bagian head.php menggantikan seluruh tag <head> di sin
     <section class="section bg-dark py-5">
         <div class="container text-center">
             <h2 class="text-light mb-5 font-weight-normal">Start Growing with Us</h2>
-            <button class="btn bg-primary w-lg" >Contact Us</button>
+            <a href="pengiriman.php"><button class="btn bg-primary w-lg" >Contact Us</button></a>
         </div>
     </section>
 

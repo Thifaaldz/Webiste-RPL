@@ -14,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($result->num_rows > 0) {
         $user = $result->fetch_assoc();
         if (password_verify($password, $user['password'])) {
-            // Login berhasil: arahkan ke halaman index.sphp
+            // Login berhasil: arahkan ke halaman index.php
             header("Location: formconsul.php");
             exit(); // Menghentikan eksekusi script setelah redirect
         } else {
@@ -31,36 +31,32 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="assets/css/register.css">
+    <link rel="stylesheet" href="assets/css/loginstyle.css">
     <title>Login</title>
 </head>
 <body>
     <div class="login-page">
-        <!-- Form Section -->
         <div class="form-section">
             <div class="form-container">
-                <h1>Login</h1>
+                <img src="assets/imgs/avatar.png" alt="Logo" class="logo">
+                <h1>Login to Ndrella Agro Distribution</h1>
                 <form method="POST">
-                    <!-- Error message -->
                     <?php if (isset($error)) { echo "<p class='error'>$error</p>"; } ?>
-                    <input type="text" name="username" placeholder="Username" required>
+                    <input type="text" name="username" placeholder="Email" required>
                     <input type="password" name="password" placeholder="Password" required>
+                    <p><a href="#">Forgot Password?</a></p>
                     <button type="submit">Login</button>
                 </form>
                 <div class="social-login">
                     <p>Or login with:</p>
                     <div class="social-buttons">
-                        <button class="google">Google</button>
-                        <button class="facebook">Facebook</button>
-                        <button class="linkedin">LinkedIn</button>
+                        <button class="google">G</button>
+                        <button class="facebook">F</button>
                     </div>
                 </div>
-                <p>Don't have an account? <a href="register.php">Sign up here</a></p>
+                <p>Don’t have an Account? <a href="register.php">Register</a></p>
             </div>
         </div>
-        
-        <!-- Illustration Section (blurred background) -->
-        <div class="illustration-section"></div>
     </div>
 </body>
 </html>
