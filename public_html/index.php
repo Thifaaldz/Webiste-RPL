@@ -433,7 +433,7 @@ include "header.php";  // Bagian head.php menggantikan seluruh tag <head> di sin
     <section class="section bg-dark py-5">
         <div class="container text-center">
             <h2 class="text-light mb-5 font-weight-normal">Start Growing with Us</h2>
-            <a href="pengiriman.php"><button class="btn bg-primary w-lg" >Contact Us</button></a>
+           <button class="btn bg-primary w-lg" >Contact Us</button>
         </div>
     </section>
 

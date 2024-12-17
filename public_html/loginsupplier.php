@@ -15,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $user = $result->fetch_assoc();
         if (password_verify($password, $user['password'])) {
             // Login berhasil: arahkan ke halaman index.php
-            header("Location: formsupplier.php");
+            header("Location: form_pesanan.php");
             exit(); // Menghentikan eksekusi script setelah redirect
         } else {
             $error = "Invalid password!";

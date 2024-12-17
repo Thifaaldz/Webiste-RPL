@@ -1,4 +1,4 @@
-<?php
+<?php 
 // Include file koneksi database
 include 'db.php';
 
@@ -42,6 +42,92 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="assets/css/registrasi.css">
     <title>Register | Ndrella Agro Distribution</title>
+
+    <!-- Tambahkan CSS untuk pop-up dan animasi -->
+    <style>
+        /* Pop-up CSS */
+        .popup {
+            display: none;
+            position: fixed;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 300px;
+            z-index: 1000;
+            opacity: 0;
+            animation: fadeIn 0.5s forwards;
+        }
+
+        /* Efek animasi pop-up muncul */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translate(-50%, -60%);
+            }
+            to {
+                opacity: 1;
+                transform: translate(-50%, -50%);
+            }
+        }
+
+        .popup.active {
+            display: block;
+        }
+
+        .popup p {
+            margin: 10px 0;
+        }
+
+        .popup .close-btn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+
+        .overlay.active {
+            display: block;
+        }
+
+        /* Animasi overlay */
+        .overlay.active {
+            animation: fadeOverlay 0.3s forwards;
+        }
+
+        @keyframes fadeOverlay {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Tambahkan styling untuk logo berhasil */
+        .popup img {
+            width: 50px;
+            margin-bottom: 15px;
+        }
+    </style>
+
 </head>
 <body>
     <div class="register-container">
@@ -83,5 +169,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </form>
         </div>
     </div>
+
+    <!-- Pop-up dan Overlay -->
+    <div class="overlay" id="overlay"></div>
+    <div class="popup" id="popup">
+        <img src="assets/imgs/testt.png" alt="Success Icon"> <!-- Logo berhasil -->
+        <p id="popup-message"><?= $success ? $success : ''; ?></p>
+        <button class="close-btn" id="close-btn">Close</button>
+    </div>
+
+    <!-- JavaScript untuk menampilkan pop-up -->
+    <script>
+        <?php if (!empty($success)) { ?>
+            // Tampilkan pop-up jika sukses
+            document.getElementById('popup').classList.add('active');
+            document.getElementById('overlay').classList.add('active');
+        <?php } ?>
+
+        // Fungsi untuk menutup pop-up
+        document.getElementById('close-btn').addEventListener('click', function() {
+            document.getElementById('popup').classList.remove('active');
+            document.getElementById('overlay').classList.remove('active');
+        });
+    </script>
+
 </body>
 </html>
