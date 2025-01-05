@@ -33,7 +33,7 @@ CREATE TABLE bahan_baku (
     nama VARCHAR(255) NOT NULL,
     harga DECIMAL(10,2) NOT NULL,
     gambar VARCHAR(255) NOT NULL
-);
+);  
 
 -- Tabel orders
 CREATE TABLE orders (

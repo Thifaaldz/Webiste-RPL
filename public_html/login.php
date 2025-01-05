@@ -1,4 +1,5 @@
 <?php
+session_start();
 include 'db.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -15,6 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $user = $result->fetch_assoc();
         if (password_verify($password, $user['password'])) {
             // Login berhasil: arahkan ke halaman index.php
+            $_SESSION['username'] = $username;
             header("Location: index.php");
             exit(); // Menghentikan eksekusi script setelah redirect
         } else {
@@ -23,6 +25,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } else {
         $error = "User not found!";
     }
+}
+if (isset($_GET['logout'])) {
+    session_destroy(); // Hapus semua data sesi
+    header("Location: index.php"); // Redirect ke halaman utama
+    exit;
 }
 ?>
 
@@ -37,8 +44,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body>
     <div class="login-page">
         <div class="form-section">
+        <a href="login_karyawan.php"><img src="assets/imgs/security.png" alt="security" class="security"></a>
             <div class="form-container">
-                <img src="assets/imgs/avatar.png" alt="Logo" class="logo">
+                <a href="login_karyawan.php"><img src="assets/imgs/avatar.png" alt="Logo" class="logo"></a>
                 <h1>Login to Ndrella Agro Distribution</h1>
                 <form method="POST">
                     <?php if (isset($error)) { echo "<p class='error'>$error</p>"; } ?>

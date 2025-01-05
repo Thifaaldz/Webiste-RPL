@@ -136,7 +136,7 @@ sup {
 }
 
 a {
-  color: #1c31eb;
+  color: #36373d;
   text-decoration: none;
   background-color: transparent;
 }
@@ -11355,6 +11355,7 @@ pre .code {
       -ms-flex-pack: justify;
           justify-content: space-between;
   max-width: 180px;
+  color: #040505;
 }
 
 .social-icons .social-link {
@@ -11362,7 +11363,7 @@ pre .code {
 }
 
 .social-icons .social-link:hover {
-  color: #F85C70;
+  color: #26d1da;
 }
 
 .navbar {
@@ -11516,7 +11517,7 @@ pre .code {
   font-weight: bold;
   line-height: .9;
   margin-bottom: 25px;
-  color: inherit;
+  color: #000000;
 }
 
 .header .header-content .header-mono {
@@ -11546,7 +11547,7 @@ pre .code {
   font-size: 2.4rem;
   font-weight: bold;
   opacity: .8;
-  color: #212529;
+  color: #121416;
 }
 
 .header-mini {
@@ -11656,4 +11657,55 @@ pre .code {
   background: #F85C70;
   display: block;
   margin-top: 10px;
+  .section-container {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 20px;
+    background: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
 }
+
+.section-header {
+    text-align: center;
+}
+
+h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+input[type="text"] {
+    padding: 10px;
+    font-size: 16px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button {
+    padding: 10px;
+    font-size: 16px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+.error {
+    color: red;
+    text-align: center;
+    margin-bottom: 20px;
+}
+}
+ 

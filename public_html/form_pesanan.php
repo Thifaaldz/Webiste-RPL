@@ -1,15 +1,22 @@
 <?php
-// Koneksi ke database
-$host = "localhost";
-$user = "root";
-$pass = "Noisyboy18";
-$db = "perkebunan";
-
-$conn = new mysqli($host, $user, $pass, $db);
-
-if ($conn->connect_error) {
-    die("Koneksi Gagal: " . $conn->connect_error);
+session_start();
+if (!isset($_SESSION['username'])) {
+    header('Location: login.php'); // Redirect ke halaman login jika belum login
+    exit;
 }
+
+$conn = new mysqli('localhost', 'root', 'Noisyboy18', 'perkebunan');
+if ($conn->connect_error) {
+    die("Koneksi ke database gagal: " . $conn->connect_error);
+}
+
+$user_id = $_SESSION['username'];
+
+// Ambil informasi pengguna
+$stmt = $conn->prepare("SELECT username FROM users WHERE username = ?");
+$stmt->bind_param('s', $user_id);
+$stmt->execute();
+$user = $stmt->get_result()->fetch_assoc();
 
 // Ambil data bahan baku
 $bahan_baku = [];
@@ -25,11 +32,11 @@ if ($result_bahan_baku->num_rows > 0) {
 $order_summary = [];
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Validasi input
-    if (empty($_POST['bahan_baku']) || empty($_POST['item_quantity'])) {
-        echo "<script>alert('Harap pilih bahan baku dan tentukan jumlah barang!');</script>";
+    if (empty($_POST['bahan_baku']) || empty($_POST['item_quantity']) || empty($_POST['full_name']) || empty($_POST['shipping_address']) || empty($_POST['city']) || empty($_POST['province']) || empty($_POST['postal_code'])) {
+        echo "<script>alert('Harap lengkapi semua data wajib!');</script>";
     } else {
         $bahan_id = $_POST['bahan_baku'];
-        $item_quantity = $_POST['item_quantity'];
+        $item_quantity = (int)$_POST['item_quantity'];
 
         // Ambil data bahan baku
         $stmt = $conn->prepare("SELECT * FROM bahan_baku WHERE id = ?");
@@ -38,19 +45,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $result = $stmt->get_result();
 
         if ($result->num_rows === 0) {
-            die("Bahan baku tidak ditemukan!");
+            echo "<script>alert('Bahan baku tidak ditemukan!');</script>";
         } else {
             $bahan = $result->fetch_assoc();
 
             // Ambil data formulir
             $full_name = $_POST['full_name'];
-            $company_name = $_POST['company_name'];
+            $company_name = $_POST['company_name'] ?? '';
             $email = $_POST['email'];
             $shipping_address = $_POST['shipping_address'];
             $city = $_POST['city'];
             $province = $_POST['province'];
             $postal_code = $_POST['postal_code'];
-            $additional_message = $_POST['additional_message'];
+            $additional_message = $_POST['additional_message'] ?? '';
             $item_name = $bahan['nama'];
             $item_price = $bahan['harga'];
             $total_price = $item_price * $item_quantity;
@@ -62,45 +69,46 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $stmt->bind_param(
                 "sssssssssdidi",
                 $full_name, $company_name, $email, $shipping_address, $city,
-                $province, $postal_code, $additional_message, $item_name, 
+                $province, $postal_code, $additional_message, $item_name,
                 $item_price, $item_quantity, $total_price, $bahan_id
             );
-            $stmt->execute();
 
-            // Ambil ringkasan pesanan
-            $last_id = $conn->insert_id;
-            $summary_sql = "SELECT * FROM orders WHERE id = ?";
-            $stmt = $conn->prepare($summary_sql);
-            $stmt->bind_param("i", $last_id);
-            $stmt->execute();
-            $result = $stmt->get_result();
-            $order_summary = $result->fetch_assoc();
+            if ($stmt->execute()) {
+                // Ambil ringkasan pesanan
+                $last_id = $conn->insert_id;
+                $summary_sql = "SELECT * FROM orders WHERE id = ?";
+                $stmt = $conn->prepare($summary_sql);
+                $stmt->bind_param("i", $last_id);
+                $stmt->execute();
+                $result = $stmt->get_result();
+                $order_summary = $result->fetch_assoc();
+            } else {
+                echo "<script>alert('Terjadi kesalahan saat menyimpan pesanan.');</script>";
+            }
         }
     }
 }
 ?>
-
-
 
 <!DOCTYPE html>
 <html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Formulir Pembayaran</title>
+    <title>Formulir Pemesanan</title>
     <link rel="stylesheet" href="assets/css/pesanan.css">
 </head>
 <body>
     <header>
-    <div class="header">
-    <img src="assets/imgs/avatar.png" alt="Logo Ndrella Agro Distribution" class="logo">
-    <h1>Ndrella Agro Distribution</h1>
-</div>
+        <div class="header">
+            <img src="assets/imgs/avatar.png" alt="Logo Ndrella Agro Distribution" class="logo">
+            <h1>Ndrella Agro Distribution</h1>
+        </div>
     </header>
 
     <div class="container">
         <form method="POST" action="">
-            <h2>Formulir Pembayaran</h2>
+            <h2>Formulir Pemesanan</h2>
             <div class="row">
                 <div>
                     <label>Nama Lengkap</label>
@@ -167,25 +175,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <p><strong>Harga:</strong> Rp <?php echo number_format($order_summary['item_price'], 0, ',', '.'); ?></p>
             <p><strong>Jumlah:</strong> <?php echo $order_summary['item_quantity']; ?></p>
             <p><strong>Total Harga:</strong> Rp <?php echo number_format($order_summary['item_price'] * $order_summary['item_quantity'], 0, ',', '.'); ?></p>
-             <button >Bayar</button>
+            <form method="POST" action="payment.php">
+                <input type="hidden" name="order_id" value="<?php echo $order_summary['id']; ?>">
+                <input type="hidden" name="total_price" value="<?php echo $order_summary['total_price']; ?>">
+                <button type="submit">Bayar Sekarang</button>
+            </form>
         </div>
-        <form method="POST" action="payment.php">
-        <input type="hidden" name="order_id" value="<?php echo $order_summary['id']; ?>">
-        <input type="hidden" name="total_price" value="<?php echo $order_summary['total_price']; ?>">
-        <input type="hidden" name="full_name" value="<?php echo $order_summary['full_name']; ?>">
-        <input type="hidden" name="company_name" value="<?php echo $order_summary['company_name']; ?>">
-        <input type="hidden" name="email" value="<?php echo $order_summary['email']; ?>">
-        <input type="hidden" name="shipping_address" value="<?php echo $order_summary['shipping_address']; ?>">
-        <input type="hidden" name="city" value="<?php echo $order_summary['city']; ?>">
-        <input type="hidden" name="province" value="<?php echo $order_summary['province']; ?>">
-        <input type="hidden" name="postal_code" value="<?php echo $order_summary['postal_code']; ?>">
-        <input type="hidden" name="additional_message" value="<?php echo $order_summary['additional_message']; ?>">
-        <input type="hidden" name="item_name" value="<?php echo $order_summary['item_name']; ?>">
-        <input type="hidden" name="item_price" value="<?php echo $order_summary['item_price']; ?>">
-        <input type="hidden" name="item_quantity" value="<?php echo $order_summary['item_quantity']; ?>">
-        <button type="submit">Bayar Sekarang</button>
-    </form>
-    </form>
         <?php endif; ?>
     </div>
 </body>

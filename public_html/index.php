@@ -1,16 +1,69 @@
 <?php 
+$host = "localhost";
+$user = "root";
+$pass = "Noisyboy18";
+$db = "perkebunan";
+
+$conn = new mysqli($host, $user, $pass, $db);
+if ($conn->connect_error) {
+    die("Koneksi Gagal: " . $conn->connect_error);
+}
+
+session_start();
+$is_logged_in = isset($_SESSION['username']);
+
+// Logout handler
+if (isset($_GET['logout'])) {
+    session_destroy(); // Hapus semua data sesi
+    header("Location: index.php"); // Redirect ke halaman utama
+    exit;
+}
+
+$error_message = null; // Variabel untuk menyimpan pesan kesalahan
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $tracking_number = $_POST['tracking_number'] ?? '';
+
+    if ($tracking_number) {
+        // Redirect ke halaman tracking jika nomor resi diberikan
+        header("Location: tracking_page.php?tracking_number=" . urlencode($tracking_number));
+        exit;
+    } else {
+        $error_message = "Nomor resi harus diisi.";
+    }
+}
+
 $title = 'PT. Ndrella Agro Distribution';  // Judul halaman dinamis
-include "header.php";  // Bagian head.php menggantikan seluruh tag <head> di sini
 ?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Start your development with JohnDoe landing page.">
+    <meta name="author" content="Devcrud">
+    <title>PT. Ndrella Agro Distribution</title>
+    <!-- font icons -->
+    <link rel="stylesheet" href="assets/vendors/themify-icons/css/themify-icons.css">
+    <!-- Bootstrap + JohnDoe main styles -->
+    <link rel="stylesheet" href="assets/css/johndoe.css">
+</head>
+<body data-spy="scroll" data-target=".navbar" data-offset="40">
 
 <body data-spy="scroll" data-target=".navbar" data-offset="40" id="home">
 <link rel="stylesheet" href="assets/css/johndoe.css">
     <header class="header">
         <div class="container">
             <ul class="social-icons pt-3">
-                <li class="social-item"><a class="social-link text-light" href="#"><i class="ti-twitter" aria-hidden="true"></i></a></li>
-                <li class="social-item"><a class="social-link text-light" href="#"><i class="ti-google" aria-hidden="true"></i></a></li>
-                <li class="social-item"><a class="social-link text-light" href="#"><i class="ti-instagram" aria-hidden="true"></i></a></li>
+            <?php if (isset($_SESSION['username'])): ?>
+                    <a href="users_history.php"><span >Welcome, <?php echo htmlspecialchars($_SESSION['username']); ?>!</span></a>
+                    <a href="?logout=true" >Logout</a> 
+                    <a href="">Tracking</a>
+                    
+                <?php else: ?>
+                    <a href="login.php" >Login</a> |
+                    <a href="register.php" >Register</a>
+                <?php endif; ?>
             </ul>  
 
             <div class="header-content">
@@ -373,8 +426,12 @@ include "header.php";  // Bagian head.php menggantikan seluruh tag <head> di sin
                             <li class="list-item">• <span class="text-muted">Nationwide delivery options.</span></li>
                             <li class="list-item">• <span class="text-muted">Free initial consultation for buyers on product sourcing and logistics.</span></li>
                         </ul>
-                        <a href="loginsupplier.php">
-                        <button class="btn btn-primary btn-rounded w-lg">Contact Now</button></a>
+                        <?php if ($is_logged_in): ?>
+                             <p>Anda sudah login. <a href="form_pesanan.php">Lanjutkan ke Pemesanan</a></p>
+                            <?php else: ?>
+                            <p><a href="login.php">Login</a> atau <a href="register.php">Daftar</a> untuk melanjutkan ke pemesanan.</p>
+                        <?php endif; ?>
+                    
                     </div>
                 </div>
                 <div class="col-md-6 col-lg-3">
@@ -390,8 +447,11 @@ include "header.php";  // Bagian head.php menggantikan seluruh tag <head> di sin
                             <li class="list-item">• <span class="text-muted">On-site visits or remote consultations with expert agronomists.</span></li>
                             <li class="list-item">• <span class="text-muted">Become a long-term partner for a discounted consultancy and priority access to farming resources.</span></li>
                         </ul>
-                        <a href="loginconsul.php">
-                        <button class="btn btn-primary btn-rounded w-lg">Contact Now</button></a>
+                        <?php if ($is_logged_in): ?>
+                             <p>Anda sudah login. <a href="formconsul.php">Lanjutkan ke Pemesanan</a></p>
+                            <?php else: ?>
+                            <p><a href="login.php">Login</a> atau <a href="register.php">Daftar</a> untuk melanjutkan ke pemesanan.</p>
+                        <?php endif; ?>
                     </div>
                 </div>
                 <div class="col-md-6 col-lg-3">
@@ -406,8 +466,11 @@ include "header.php";  // Bagian head.php menggantikan seluruh tag <head> di sin
                             <li class="list-item">• <span class="text-muted">Pricing available upon request or bulk order discounts</span></li>
                             <li class="list-item">• <span class="text-muted">Expert guidance on selecting the best products for your farm’s conditions</span></li>
                         </ul>
-                        <a href="login.php">
-                        <button class="btn btn-primary btn-rounded w-lg">Contact Now</button></a>
+                        <?php if ($is_logged_in): ?>
+                             <p>Anda sudah login. <a href="form_pesanan.php">Lanjutkan ke Pemesanan</a></p>
+                            <?php else: ?>
+                            <p><a href="login.php">Login</a> atau <a href="register.php">Daftar</a> untuk melanjutkan ke pemesanan.</p>
+                        <?php endif; ?>
                     </div>
                 </div>
                 <div class="col-md-6 col-lg-3">
@@ -423,8 +486,11 @@ include "header.php";  // Bagian head.php menggantikan seluruh tag <head> di sin
                             <li class="list-item">• <span class="text-muted">Priority access to our full range of products, consulting, and bulk purchasing discounts.</span></li>
                             <li class="list-item">• <span class="text-muted">Long-Term Collaboration for Large-Scale Farms.</span></li>
                         </ul>
-                        <a href="login.php">
-                        <button class="btn btn-primary btn-rounded w-lg">Contact Now</button></a>
+                        <?php if ($is_logged_in): ?>
+                             <p>Anda sudah login. <a href="formconsul.php">Lanjutkan ke Pemesanan</a></p>
+                            <?php else: ?>
+                            <p><a href="login.php">Login</a> atau <a href="register.php">Daftar</a> untuk melanjutkan ke pemesanan.</p>
+                        <?php endif; ?>
                     </div>
                 </div>
             </div>
@@ -432,8 +498,8 @@ include "header.php";  // Bagian head.php menggantikan seluruh tag <head> di sin
     </section>
     <section class="section bg-dark py-5">
         <div class="container text-center">
-            <h2 class="text-light mb-5 font-weight-normal">Start Growing with Us</h2>
-           <button class="btn bg-primary w-lg" >Contact Us</button>
+            <h2 class="text-light mb-5 font-weight-normal">Tracking Your Package</h2>
+           <a href="tracking.php"><button class="btn bg-primary w-lg" >Tracking</button></a>
         </div>
     </section>
 
@@ -689,68 +755,20 @@ include "header.php";  // Bagian head.php menggantikan seluruh tag <head> di sin
             </div>
         </div>
     </section>
-
-<div class="section contact" id="contact">
-    <div class="img-holder" style="position: absolute; overflow: hidden">
-        <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.8)); z-index: 1;"></div>
-        <img src="assets/imgs/footer.jpg" style="width: 100%; height: auto; filter: brightness(70%); position: absolute; top: 0; left: 0; z-index: 0;">
-        <div class="row" style="position: relative; z-index: 2; padding: 20px; color: #fff;">
-            <div class="col-lg-8">
-                <div class="contact-form-card" style="background: rgba(255, 255, 255, 0.9); padding: 20px; border-radius: 10px; color: #000;">
-                    <h4 class="contact-title">Send a Suggestion for Us</h4>
-                    <form action="">
-                        <div class="form-group">
-                            <input class="form-control" type="text" placeholder="Name *" required>
-                        </div>
-                        <div class="form-group">
-                            <input class="form-control" type="email" placeholder="Email *" required>
-                        </div>
-                        <div class="form-group">
-                            <textarea class="form-control" placeholder="Message *" rows="7" required></textarea>
-                        </div>
-                        <div class="form-group">
-                            <button type="submit" class="form-control btn btn-primary">Send a Suggestion for Us</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-            <div class="col-lg-4">
-                <div class="contact-info-card" style="background: rgba(255, 255, 255, 0.9); padding: 20px; border-radius: 10px; color: #000;">
-                    <h4 class="contact-title">Contact Us</h4>
-                    <div class="row mb-2">
-                        <div class="col-1 pt-1 mr-1">
-                            <i class="ti-mobile icon-md"></i>
-                        </div>
-                        <div class="col-10">
-                            <h6 class="d-inline">Phone : <br><span class="text-muted">+ (17) 7710-382</span></h6>
-                        </div>
-                    </div>
-                    <div class="row mb-2">
-                        <div class="col-1 pt-1 mr-1">
-                            <i class="ti-map-alt icon-md"></i>
-                        </div>
-                        <div class="col-10">
-                            <h6 class="d-inline">Address :<br><span class="text-muted">Jl. Jenderal Basuki Rachmat No.1A, Cipinang Besar Sel., Kecamatan Jatinegara, Kota Jakarta Timur, Daerah Khusus Ibukota Jakarta 13410.</span></h6>
-                        </div>
-                    </div>
-                    <div class="row mb-2">
-                        <div class="col-1 pt-1 mr-1">
-                            <i class="ti-envelope icon-md"></i>
-                        </div>
-                        <div class="col-10">
-                            <h6 class="d-inline">Email :<br><span class="text-muted">support@nad.com</span></h6>
-                        </div>
-                    </div>
-                    <ul class="social-icons pt-4">
-                        <li class="social-item"><a class="social-link text-light" href="#"><i class="ti-facebook" aria-hidden="true"></i></a></li>
-                        <li class="social-item"><a class="social-link text-light" href="#"><i class="ti-twitter" aria-hidden="true"></i></a></li>
-                        <li class="social-item"><a class="social-link text-light" href="#"><i class="ti-google" aria-hidden="true"></i></a></li>
-                        <li class="social-item"><a class="social-link text-light" href="#"><i class="ti-instagram" aria-hidden="true"></i></a></li>
-                        <li class="social-item"><a class="social-link text-light" href="#"><i class="ti-github" aria-hidden="true"></i></a></li>
-                    </ul>
-                </div>
-            </div>
+    <section class="section-container">
+        <div class="section-header">
+            <h1>Pencarian Nomor Resi</h1>
         </div>
-    </div>
-</section>
-<?php include 'footer.php'; ?>
+
+        <?php if ($error_message): ?>
+            <p class="error"><?php echo htmlspecialchars($error_message); ?></p>
+        <?php endif; ?>
+
+        <form method="POST" action="">
+            <input type="text" name="tracking_number" placeholder="Masukkan nomor resi" required>
+            <button type="submit">Lacak</button>
+        </form>
+    </section>       
+</body>
+</html>
+<?php include 'footer.php';$conn->close(); ?>

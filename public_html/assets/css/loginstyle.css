@@ -20,13 +20,14 @@ body {
     align-items: center;
     width: 100%;
     height: 100%;
+    position: relative;
 }
 
 /* Form Section */
 .form-section {
     width: 100%;
     max-width: 450px;
-    background:#93a51b27 ;
+    background: #93a51b27;
     border-radius: 10px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
     padding: 40px;
@@ -89,7 +90,7 @@ button:hover {
     justify-content: center;
 }
 
-.social-buttons button {
+.social-buttons button{
     width: 50px;
     height: 50px;
     border-radius: 50%;
@@ -126,3 +127,11 @@ a:hover {
     margin-bottom: 20px;
 }
 
+/* Security Positioning */
+.security {
+    position: relative;  /* Posisi fixed agar tetap berada di pojok kanan atas */
+    top: 10px;        /* Jarak 10px dari atas */
+    right: 0px;      /* Jarak 10px dari kanan */
+    width: 100px;     /* Ukuran logo */
+    z-index: 1000;    /* Pastikan logo berada di atas konten lainnya */
+}
