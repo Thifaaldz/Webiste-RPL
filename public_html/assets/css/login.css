@@ -27,11 +27,13 @@ body {
 .form-section {
     width: 100%;
     max-width: 450px;
-    background: #93a51b;
+    background: #93a51b42;
+    backdrop-filter: blur(10px);
     border-radius: 10px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
     padding: 40px;
     text-align: center;
+    position: relative; /* Agar posisi absolut berlaku terhadap elemen ini */
 }
 
 .form-container h1 {
@@ -129,6 +131,9 @@ a:hover {
 
 /* Security Positioning */
 .security {
-    width: 05px;
+    width: 30px;
     margin-bottom: 20px;
+    position: absolute;
+    right: 30px;
+    top: 30px;
 }
