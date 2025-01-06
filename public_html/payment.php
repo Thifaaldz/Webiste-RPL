@@ -1,14 +1,7 @@
 <?php
 // Koneksi ke database
-$host = "localhost";
-$user = "root";
-$pass = "nafilahfathir3110";
-$db = "perkebunan";
+include 'db.php';
 
-$conn = new mysqli($host, $user, $pass, $db);
-if ($conn->connect_error) {
-    die("Koneksi Gagal: " . $conn->connect_error);
-}
 
 // Ambil data order terakhir berdasarkan order_id
 $order_id = isset($_POST['order_id']) ? $_POST['order_id'] : null;

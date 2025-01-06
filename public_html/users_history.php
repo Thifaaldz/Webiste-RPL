@@ -1,16 +1,6 @@
 <?php
-// Koneksi ke database
-$host = 'localhost';
-$user = 'root';
-$password = 'nafilahfathir3110'; // Ganti dengan password MySQL Anda
-$database = 'perkebunan';
+include 'db.php';
 
-$conn = new mysqli($host, $user, $password, $database);
-
-// Periksa koneksi
-if ($conn->connect_error) {
-    die("Koneksi gagal: " . $conn->connect_error);
-}
 
 // Ambil riwayat pemesanan dari tabel orders
 $sql = "SELECT * FROM orders ORDER BY id DESC";
