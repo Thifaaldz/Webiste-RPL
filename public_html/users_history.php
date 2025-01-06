@@ -1,7 +1,6 @@
 <?php
 include 'db.php';
 
-
 // Ambil riwayat pemesanan dari tabel orders
 $sql = "SELECT * FROM orders ORDER BY id DESC";
 $result = $conn->query($sql);
