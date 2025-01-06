@@ -50,7 +50,7 @@ if (isset($_GET['logout'])) {
                 <h1>Login to Ndrella Agro Distribution</h1>
                 <form method="POST">
                     <?php if (isset($error)) { echo "<p class='error'>$error</p>"; } ?>
-                    <input type="text" name="username" placeholder="Email" required>
+                    <input type="text" name="username" placeholder="Username" required>
                     <input type="password" name="password" placeholder="Password" required>
                     <p><a href="#">Forgot Password?</a></p>
                     <button type="submit">Login</button>

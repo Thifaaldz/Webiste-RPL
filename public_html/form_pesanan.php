@@ -5,7 +5,7 @@ if (!isset($_SESSION['username'])) {
     exit;
 }
 
-$conn = new mysqli('localhost', 'root', 'Noisyboy18', 'perkebunan');
+$conn = new mysqli('localhost', 'root', 'nafilahfathir3110', 'perkebunan');
 if ($conn->connect_error) {
     die("Koneksi ke database gagal: " . $conn->connect_error);
 }

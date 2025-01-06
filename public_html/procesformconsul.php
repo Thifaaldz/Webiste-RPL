@@ -2,7 +2,7 @@
 // Konfigurasi database
 $host = "localhost";
 $username = "root";
-$password = "Noisyboy18";
+$password = "nafilahfathir3110";
 $database = "perkebunan";
 
 // Membuat koneksi

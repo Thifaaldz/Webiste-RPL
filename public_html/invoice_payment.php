@@ -2,7 +2,7 @@
 // Koneksi ke database
 $host = "localhost";
 $user = "root";
-$pass = "Noisyboy18";
+$pass = "nafilahfathir3110";
 $db = "perkebunan";
 
 $conn = new mysqli($host, $user, $pass, $db);

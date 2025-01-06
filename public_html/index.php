@@ -1,7 +1,7 @@
 <?php 
 $host = "localhost";
 $user = "root";
-$pass = "Noisyboy18";
+$pass = "nafilahfathir3110";
 $db = "perkebunan";
 
 $conn = new mysqli($host, $user, $pass, $db);
@@ -402,7 +402,7 @@ $title = 'PT. Ndrella Agro Distribution';  // Judul halaman dinamis
             <div class="row align-items-left">
                 <div class="col-md-6 col-lg-3">
                     <div class="price-card text-center mb-4">
-                        <h3 class="price-card-title">Vegetable Supplies</h3>
+                        <h3 class="price-card-title">Raw Plantation Supplies</h3>
                         <div class="price-card-cost">
                             <span class="num">150kg</span>
                             <span class="x">Minimum Order</span>
@@ -442,7 +442,7 @@ $title = 'PT. Ndrella Agro Distribution';  // Judul halaman dinamis
                 </div>
                 <div class="col-md-6 col-lg-3">
                     <div class="price-card text-center price-card-requried mb-4">
-                        <h3 class="price-card-title">Agricultural Supplies</h3>
+                        <h3 class="price-card-title">Plantation Seeds Supplies</h3>
                         <div class="price-card-cost">
                             <span class="num">100kg</span>
                             <span class="x">Minimum Order</span>

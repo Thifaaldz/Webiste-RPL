@@ -2,7 +2,7 @@
 // Koneksi ke database
 $host = 'localhost';
 $user = 'root';
-$password = 'Noisyboy18'; // Ganti dengan password MySQL Anda
+$password = 'nafilahfathir3110'; // Ganti dengan password MySQL Anda
 $database = 'perkebunan';
 
 $conn = new mysqli($host, $user, $password, $database);
