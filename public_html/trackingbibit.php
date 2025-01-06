@@ -1,14 +1,6 @@
 <?php
-// Konfigurasi koneksi database
-$host = "localhost";
-$user = "root";
-$pass = "nafilahfathir3110";
-$db = "perkebunan";
+include 'db.php';
 
-$conn = new mysqli($host, $user, $pass, $db);
-if ($conn->connect_error) {
-    die("Koneksi Gagal: " . $conn->connect_error);
-}
 
 $error_message = null; // Variabel untuk menyimpan pesan kesalahan
 

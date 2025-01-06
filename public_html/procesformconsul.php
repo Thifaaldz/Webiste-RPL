@@ -1,17 +1,6 @@
 <?php
-// Konfigurasi database
-$host = "localhost";
-$username = "root";
-$password = "nafilahfathir3110";
-$database = "perkebunan";
+include 'db.php';
 
-// Membuat koneksi
-$conn = new mysqli($host, $username, $password, $database);
-
-// Cek koneksi
-if ($conn->connect_error) {
-    die("Koneksi gagal: " . $conn->connect_error);
-}
 
 // Ambil data dari formulir
 $name = $_POST['name'];
