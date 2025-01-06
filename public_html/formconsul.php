@@ -1,16 +1,102 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Farm Consultancy Form</title>
-    <!-- Menghubungkan file CSS -->
-    <link rel="stylesheet" href="assets/css/formconsul.css">
+    <title>Form Konsultasi Pertanian</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-image: url('assets/imgs/headers.jpg');
+            background-size: cover;
+            background-position: center;
+            margin: 0;
+            padding: 0;
+        }
+        /* Header Styling */
+        .header {
+            background-color: #93a51b42;
+            backdrop-filter: blur(10px);
+            
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        .header img {
+            height: 50px;
+            display: block;
+            margin: 0 auto 10px;
+        }
+        .header h1 {
+            font-size: 24px;
+            margin: 0;
+        }
+
+        /* Form Container Styling */
+        .form-container {
+            max-width: 800px;
+            margin: 50px auto;
+            background: #93a51b42;
+            backdrop-filter: blur(10px);
+            padding: 30px;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+        .form-container h2 {
+            text-align: center;
+            font-size: 22px;
+            margin-bottom: 20px;
+            color: #fff;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color:rgb(255, 255, 255);
+        }
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+            color: #333;
+        }
+        .form-group textarea {
+            resize: none;
+        }
+        .form-group button {
+            width: 100%;
+            padding: 10px;
+            background-color: #28a745;
+            color: #ffffff;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .form-group button:hover {
+            background-color: #218838;
+        }
+    </style>
 </head>
 <body>
 
+<!-- Header Section -->
+<div class="header">
+    <img src="assets/imgs/avatar.png" alt="Logo Konsultasi Pertanian">
+    <h1>Konsultasi Pertanian Ahli</h1>
+</div>
+
+<!-- Form Container -->
 <div class="form-container">
-    <h1>Expert Farm Consultancy</h1>
+    <h2>Form Permintaan Konsultasi</h2>
     <form action="procesformconsul.php" method="post">
         <!-- Informasi Pribadi -->
         <div class="form-group">

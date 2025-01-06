@@ -38,13 +38,13 @@ if (isset($_GET['logout'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="assets/css/loginstyle.css">
+    <link rel="stylesheet" href="assets/css/login.css">
     <title>Login</title>
 </head>
 <body>
     <div class="login-page">
         <div class="form-section">
-        <a href="login_karyawan.php"><img src="assets/imgs/security.png" alt="security" class="security"></a>
+        <a href="login_karyawan.php"><img src="assets/imgs/protection.png" alt="security" class="security"></a>
             <div class="form-container">
                 <a href="login_karyawan.php"><img src="assets/imgs/avatar.png" alt="Logo" class="logo"></a>
                 <h1>Login to Ndrella Agro Distribution</h1>

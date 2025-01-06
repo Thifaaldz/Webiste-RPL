@@ -1,7 +1,6 @@
 <?php
 include 'db.php';
 
-
 // Fungsi untuk mengambil semua data tracking
 function getAllTracking($conn) {
     $sql = "SELECT st.id, st.tracking_number, st.status, st.last_updated, o.full_name AS sender_name, o.company_name AS receiver_name FROM shipping_tracking st JOIN orders o ON st.tracking_number = o.tracking_number";
@@ -42,77 +41,93 @@ $trackings = getAllTracking($conn);
     <title>Manajemen Tracking</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f8f9fa;
+            font-family: 'Arial', sans-serif;
+            background-color: #f9f9f9;
             margin: 0;
             padding: 0;
         }
         .container {
-            max-width: 900px;
+            max-width: 1000px;
             margin: 50px auto;
-            background: white;
+            background: #ffffff;
             padding: 20px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+            border-radius: 10px;
         }
-        h1 {
-            text-align: center;
-            margin-bottom: 20px;
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+        .header h1 {
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .header img {
+            height: 60px;
         }
         table {
             width: 100%;
             border-collapse: collapse;
             margin-bottom: 20px;
+            font-size: 14px;
         }
         table th, table td {
-            border: 1px solid #ddd;
-            padding: 8px;
+            border: 1px solid #e0e0e0;
+            padding: 12px 10px;
             text-align: center;
         }
         table th {
-            background-color: #f1f1f1;
+            background-color: #f5f5f5;
+            color: #333;
+            font-weight: bold;
         }
-        form {
+        table tbody tr:hover {
+            background-color: #f9f9f9;
+        }
+        .status {
             display: flex;
-            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
         }
-        .form-group {
-            margin-bottom: 15px;
-        }
-        .form-group label {
-            display: block;
-            margin-bottom: 5px;
-        }
-        .form-group input, .form-group select {
-            width: 100%;
-            padding: 8px;
+        .status select {
+            padding: 5px;
             border: 1px solid #ccc;
-            border-radius: 4px;
+            border-radius: 5px;
         }
         button {
             background-color: #007bff;
             color: white;
             border: none;
-            padding: 10px;
+            padding: 8px 12px;
             border-radius: 5px;
             cursor: pointer;
+            font-size: 12px;
         }
         button:hover {
             background-color: #0056b3;
         }
         .message {
-            text-align: center;
+            padding: 10px;
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+            border-radius: 5px;
             margin-bottom: 20px;
-            color: green;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Manajemen Tracking Pengiriman</h1>
+        <div class="header">
+            <h1>Tracking Management</h1>
+            <img src="assets/imgs/avatar.png" alt="Logo">
+        </div>
 
         <?php if (isset($message)): ?>
-            <div class="message"> <?php echo htmlspecialchars($message); ?> </div>
+            <div class="message"><?php echo htmlspecialchars($message); ?></div>
         <?php endif; ?>
 
         <table>
@@ -130,12 +145,12 @@ $trackings = getAllTracking($conn);
                 <?php foreach ($trackings as $tracking): ?>
                     <tr>
                         <td><?php echo htmlspecialchars($tracking['tracking_number']); ?></td>
-                        <td><p>PT.Nderrla Argo Distribution</p></td>
+                        <td>PT. Ndrella Agro Distribution</td>
                         <td><?php echo htmlspecialchars($tracking['receiver_name']); ?></td>
                         <td><?php echo htmlspecialchars($tracking['status']); ?></td>
                         <td><?php echo htmlspecialchars($tracking['last_updated']); ?></td>
                         <td>
-                            <form method="POST" style="display:inline-block;">
+                            <form method="POST" class="status">
                                 <input type="hidden" name="tracking_id" value="<?php echo htmlspecialchars($tracking['id']); ?>">
                                 <select name="status">
                                     <option value="Diproses" <?php echo $tracking['status'] === 'Diproses' ? 'selected' : ''; ?>>Diproses</option>
