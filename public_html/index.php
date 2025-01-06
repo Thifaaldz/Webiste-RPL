@@ -20,19 +20,6 @@ if (isset($_GET['logout'])) {
 }
 
 $error_message = null; // Variabel untuk menyimpan pesan kesalahan
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $tracking_number = $_POST['tracking_number'] ?? '';
-
-    if ($tracking_number) {
-        // Redirect ke halaman tracking jika nomor resi diberikan
-        header("Location: tracking_page.php?tracking_number=" . urlencode($tracking_number));
-        exit;
-    } else {
-        $error_message = "Nomor resi harus diisi.";
-    }
-}
-
 $title = 'PT. Ndrella Agro Distribution';  // Judul halaman dinamis
 ?>
 <!DOCTYPE html>
@@ -755,20 +742,7 @@ $title = 'PT. Ndrella Agro Distribution';  // Judul halaman dinamis
             </div>
         </div>
     </section>
-    <section class="section-container">
-        <div class="section-header">
-            <h1>Pencarian Nomor Resi</h1>
-        </div>
-
-        <?php if ($error_message): ?>
-            <p class="error"><?php echo htmlspecialchars($error_message); ?></p>
-        <?php endif; ?>
-
-        <form method="POST" action="">
-            <input type="text" name="tracking_number" placeholder="Masukkan nomor resi" required>
-            <button type="submit">Lacak</button>
-        </form>
-    </section>       
+       
 </body>
 </html>
 <?php include 'footer.php';$conn->close(); ?>
