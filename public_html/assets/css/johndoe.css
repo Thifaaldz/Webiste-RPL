@@ -136,9 +136,10 @@ sup {
 }
 
 a {
-  color: #36373d;
+  color: #0a2ae0;
   text-decoration: none;
   background-color: transparent;
+  
 }
 
 a:hover {
@@ -11359,7 +11360,7 @@ pre .code {
 }
 
 .social-icons .social-link {
-  font-size: 18px;
+  font-size: 30px;
 }
 
 .social-icons .social-link:hover {
@@ -11517,7 +11518,7 @@ pre .code {
   font-weight: bold;
   line-height: .9;
   margin-bottom: 25px;
-  color: #000000;
+  
 }
 
 .header .header-content .header-mono {
@@ -11547,7 +11548,7 @@ pre .code {
   font-size: 2.4rem;
   font-weight: bold;
   opacity: .8;
-  color: #121416;
+  color: #ffffff;
 }
 
 .header-mini {

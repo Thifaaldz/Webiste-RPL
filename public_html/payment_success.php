@@ -77,11 +77,12 @@ $tracking_number = $_GET['tracking_number'] ?? 'Tidak tersedia';
         <div class="content">
             <p>Terima kasih telah melakukan pembayaran. Pembayaran Anda telah diterima dengan sukses.</p>
             <p class="tracking-info">Nomor Resi Anda: <?php echo htmlspecialchars($tracking_number); ?></p>
-            <a href="tracking_page.php?tracking_number=<?php echo htmlspecialchars($tracking_number); ?>" class="action-button">Lacak Pengiriman</a>
+            <a href="index.php" class="action-button">Kembali Ke Halaman Utama</a>
         </div>
 
         <div class="footer">
             <p>Jika Anda memiliki pertanyaan, jangan ragu untuk menghubungi kami.</p>
+            <button class="print-button" onclick="window.print();">Cetak</button>
         </div>
     </div>
 </body>

@@ -45,7 +45,6 @@ $title = 'PT. Ndrella Agro Distribution';  // Judul halaman dinamis
             <?php if (isset($_SESSION['username'])): ?>
                     <a href="users_history.php"><span >Welcome, <?php echo htmlspecialchars($_SESSION['username']); ?>!</span></a>
                     <a href="?logout=true" >Logout</a> 
-                    <a href="">Tracking</a>
                     
                 <?php else: ?>
                     <a href="login.php" >Login</a> |
@@ -454,7 +453,7 @@ $title = 'PT. Ndrella Agro Distribution';  // Judul halaman dinamis
                             <li class="list-item">• <span class="text-muted">Expert guidance on selecting the best products for your farm’s conditions</span></li>
                         </ul>
                         <?php if ($is_logged_in): ?>
-                             <p>Anda sudah login. <a href="form_pesanan.php">Lanjutkan ke Pemesanan</a></p>
+                             <p>Anda sudah login. <a href="form_bibit.php">Lanjutkan ke Pemesanan</a></p>
                             <?php else: ?>
                             <p><a href="login.php">Login</a> atau <a href="register.php">Daftar</a> untuk melanjutkan ke pemesanan.</p>
                         <?php endif; ?>
@@ -486,7 +485,8 @@ $title = 'PT. Ndrella Agro Distribution';  // Judul halaman dinamis
     <section class="section bg-dark py-5">
         <div class="container text-center">
             <h2 class="text-light mb-5 font-weight-normal">Tracking Your Package</h2>
-           <a href="tracking.php"><button class="btn bg-primary w-lg" >Tracking</button></a>
+           <a href="tracking.php"><button class="btn bg-primary w-lg" >Tracking Supplier</button></a>
+           <a href="trackingbibit.php"><button class="btn bg-primary w-lg" >Tracking Bibit</button></a>
         </div>
     </section>
 
