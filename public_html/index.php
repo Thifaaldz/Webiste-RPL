@@ -478,7 +478,7 @@ $title = 'PT. Ndrella Agro Distribution';  // Judul halaman dinamis
     <section class="section bg-dark py-5">
         <div class="container text-center">
             <h2 class="text-light mb-5 font-weight-normal">Tracking Your Package</h2>
-           <a href="tracking.php"><button class="btn bg-primary w-lg" >Tracking Supplier</button></a>
+           <a href="tracking.php"><button class="btn bg-primary w-lg" >Tracking Bahan Mentah</button></a>
            <a href="trackingbibit.php"><button class="btn bg-primary w-lg" >Tracking Bibit</button></a>
         </div>
     </section>

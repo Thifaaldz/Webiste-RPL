@@ -1,7 +1,6 @@
 <?php
 include 'db.php';
 
-
 // Ambil riwayat pemesanan dari tabel orders
 $sql = "SELECT * FROM orders ORDER BY id DESC";
 $result = $conn->query($sql);
@@ -18,24 +17,84 @@ $result = $conn->query($sql);
             font-family: Arial, sans-serif;
             margin: 20px;
         }
+
+        /* Header Section */
+        .header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+        }
+
+        .header img {
+            width: 100px;
+            height: auto;
+            border-radius: 50%;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-right: 15px;
+        }
+
+        .header .text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header h2 {
+            font-size: 24px;
+            color: #000;
+            margin: 0;
+        }
+
+        /* Pembatas Hijau */
+        .separator {
+            margin: 10px 0 20px 0;
+            border-top: 4px solid #2ecc71;
+            border-radius: 2px;
+        }
+
+        /* Judul Riwayat Pemesanan */
+        .title {
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        /* Table Section */
         table {
             width: 100%;
             border-collapse: collapse;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
-        table, th, td {
-            border: 1px solid #ddd;
+
+        thead th {
+            background-color: #2ecc71;
+            color: white;
+            padding: 12px;
+            text-align: left;
         }
+
         th, td {
+            border: 1px solid #ddd;
             padding: 10px;
             text-align: left;
         }
-        th {
-            background-color: #f4f4f4;
+
+        tbody tr:nth-child(even) {
+            background-color: #f9f9f9;
         }
+
+        tbody tr:hover {
+            background-color: #f1f1f1;
+        }
+
         .status-paid {
             color: green;
             font-weight: bold;
         }
+
         .status-pending {
             color: orange;
             font-weight: bold;
@@ -44,7 +103,19 @@ $result = $conn->query($sql);
 </head>
 <body>
 
-<h1>Riwayat Pemesanan</h1>
+<!-- Header Section -->
+<div class="header">
+    <img src="assets/imgs/avatar.png" alt="Ndrella Agro Distribution Logo">
+    <div class="text">
+        <h2>PT. Ndrella Agro Distribution</h2>
+    </div>
+</div>
+
+<!-- Pembatas Hijau -->
+<div class="separator"></div>
+
+<!-- Title Section -->
+<div class="title">Riwayat Pemesanan</div>
 
 <?php if ($result->num_rows > 0): ?>
     <table>
